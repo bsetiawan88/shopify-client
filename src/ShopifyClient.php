@@ -222,7 +222,7 @@ class ShopifyClient
 		$url .= $code;
 
 		$response = Requests::post($url, array(), array(), array());
-		$responseBody = json_decode($response['body'], true);
+		$responseBody = json_decode($response->body, true);
 
 		if (null === $responseBody || !isset($responseBody['access_token'])) {
 			return false;
@@ -276,7 +276,7 @@ class ShopifyClient
 			$url = sprintf('%s?%s', $url, http_build_query($body));
 			$response = Requests::get($url, $header, array());
 		}
-		$responseBody = json_decode($response['body'], true);
+		$responseBody = json_decode($response->body, true);
 
 		if (isset($responseBody['errors'])) {
 			if (is_array($responseBody['errors'])) {
