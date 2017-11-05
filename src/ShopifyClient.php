@@ -268,12 +268,14 @@ class ShopifyClient
 		$url = $this->getBaseUri() . $path;
 
 		$header = array(
-			'X-Shopify-Access-Token: ' . $this->token
+			'X-Shopify-Access-Token' => $this->token
 		);
 		if ('POST' === $method) {
 			$response = Requests::post($url, $header, is_array($body) ? http_build_query($body) : $body, array());
-		} elseif ('GET' === $method && is_array($body) && !empty($body)) {
-			$url = sprintf('%s?%s', $url, http_build_query($body));
+		} elseif ('GET' === $method) {
+			if ( is_array($body) && !empty($body) ) {
+				$url = sprintf('%s?%s', $url, http_build_query($body));
+			}
 			$response = Requests::get($url, $header, array());
 		}
 		$responseBody = json_decode($response->body, true);
