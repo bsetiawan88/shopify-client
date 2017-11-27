@@ -272,11 +272,16 @@ class ShopifyClient
 		);
 		if ('POST' === $method) {
 			$response = Requests::post($url, $header, is_array($body) ? http_build_query($body) : $body, array());
-		} elseif ('GET' === $method) {
+		} elseif ('GET' === $method || 'DELETE' === $method) {
 			if ( is_array($body) && !empty($body) ) {
 				$url = sprintf('%s?%s', $url, http_build_query($body));
 			}
-			$response = Requests::get($url, $header, array());
+
+			if ($method === 'GET') {
+				$response = Requests::get($url, $header, array());
+			} else if ($method === 'DELETE') {
+				$response = Requests::delete($url, $header, array());
+			}
 		}
 		$responseBody = json_decode($response->body, true);
 
