@@ -26,7 +26,9 @@ class ShopifyClient
 	const SCOPE_WRITE_FULFILLMENTS = 'write_fulfillments';
 	const SCOPE_READ_SHIPPING = 'read_shipping';
 	const SCOPE_WRITE_SHIPPING = 'write_shipping';
-
+	const SCOPE_READ_CHECKOUTS = 'read_checkouts';
+	const SCOPE_WRITE_CHECKOUTS = 'write_checkouts';
+	
 	/**
 	 * API Key
 	 *
